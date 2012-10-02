@@ -1,0 +1,69 @@
+
+;;; Beep Beep - Shut up!
+(setq visible-bell 1)
+; remove blinking too? (setq ring-bell-function 'ignore)
+
+;;; set initial frame size
+; not the position (setq initial-frame-alist '((top . 1) (left . 1) (width . 144) (height . 60)))
+(setq initial-frame-alist '((width . 144) (height . 60)))
+
+;;; new custom file
+(setq custom-file "~/.ecb-emacs/custom.el")
+(load custom-file t)
+
+;; fullscreen mode
+(add-to-list 'load-path "~/.ecb-emacs/elisp")
+(require 'fullscreen)
+(global-set-key [f11] 'fullscreen-toggle)
+
+;; rainbow mode
+(require 'rainbow-mode)
+
+;; PlantUML
+(require 'plantuml-mode)
+
+;;;------------------------------------------------------------------------
+;;; FROM
+;;; http://homepages.inf.ed.ac.uk/s0243221/emacs/
+
+;; ===== Set the highlight current line minor mode ===== 
+;; In every buffer, the line which contains the cursor will be fully
+;; highlighted
+(global-hl-line-mode 1)
+
+;; ========== Place Backup Files in Specific Directory ==========
+;; Enable backup files.
+(setq make-backup-files t)
+;; Enable versioning with default values (keep five last versions, I think!)
+(setq version-control t)
+;; Save all backup file in this directory.
+(setq backup-directory-alist (quote ((".*" . "~/.ecb-emacs/backups/*"))))
+
+;; Show line-number in the mode line
+(line-number-mode 1)
+
+;; Show column-number in the mode line
+(column-number-mode 1)
+
+;; Set emacs background colour
+(set-background-color "WhiteSmoke")
+
+;;;------------------------------------------------------------------------
+
+;;;
+;;; ECB Setup
+;;;
+
+;; Load CEDET.
+(load-file "~/.ecb-emacs/cedet-1.0/common/cedet.el")
+
+;; Enable EDE (Project Management) features
+(global-ede-mode 1)
+
+;; LOAD ECB
+(add-to-list 'load-path "~/.ecb-emacs/ecb-2.40")
+(require 'ecb)
+
+;; Run
+(ecb-activate)
+
